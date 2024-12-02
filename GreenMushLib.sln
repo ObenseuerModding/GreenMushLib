@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{23605198-1182-4BEC-BBA5-570847E81CC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenMushLib", "src\GreenMushLib\GreenMushLib.csproj", "{032F529D-CEE0-48A7-AAFF-769CA56DFA94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{032F529D-CEE0-48A7-AAFF-769CA56DFA94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032F529D-CEE0-48A7-AAFF-769CA56DFA94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032F529D-CEE0-48A7-AAFF-769CA56DFA94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032F529D-CEE0-48A7-AAFF-769CA56DFA94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{032F529D-CEE0-48A7-AAFF-769CA56DFA94} = {23605198-1182-4BEC-BBA5-570847E81CC7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33D2C135-32C5-4690-81A9-200E07D82FB2}
+	EndGlobalSection
+EndGlobal

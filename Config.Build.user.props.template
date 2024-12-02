@@ -1,0 +1,28 @@
+<Project>
+    <PropertyGroup>
+        <!-- 
+          GameDir should be whatever steam shows you when you do
+          right-click -> manage -> browse local files
+
+          Copy this file to Directory.Build.user.props and modify the GameDir
+         -->
+        <GameDir>full/path/to/steamapps/common/Obenseuer</GameDir>
+
+        <PluginsDir>$(GameDir)/BepInEx/plugins</PluginsDir>
+        <DependsDir>$(GameDir)/Obenseuer_Data/Managed</DependsDir>
+
+        <FinalAssemblyName>$(AssemblyName).dll</FinalAssemblyName>
+    </PropertyGroup>
+
+    <Target Name="PostBuildCopy" AfterTargets="Build">
+        <!-- Copy the final assembly to the Plugins directory -->
+        <Copy
+            SourceFiles="$(OutputPath)$(FinalAssemblyName)"
+            DestinationFolder="$(PluginsDir)"
+            Condition="Exists('$(OutputPath)$(FinalAssemblyName)')" />
+    </Target>
+
+    <Target Name="LogPropsLoaded">
+        <Message Text="Config file has been loaded." Importance="high" />
+    </Target>
+</Project>
