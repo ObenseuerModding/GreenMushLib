@@ -1,28 +1,52 @@
 <Project>
     <PropertyGroup>
-        <!-- 
-          GameDir should be whatever steam shows you when you do
-          right-click -> manage -> browse local files
-
-          Copy this file to Directory.Build.user.props and modify the GameDir
-         -->
-        <GameDir>full/path/to/steamapps/common/Obenseuer</GameDir>
-
-        <PluginsDir>$(GameDir)/BepInEx/plugins</PluginsDir>
-        <DependsDir>$(GameDir)/Obenseuer_Data/Managed</DependsDir>
-
-        <FinalAssemblyName>$(AssemblyName).dll</FinalAssemblyName>
+        <DeployToProd>false</DeployToProd>
+        <BuildStaging>false</BuildStaging>
     </PropertyGroup>
 
-    <Target Name="PostBuildCopy" AfterTargets="Build">
-        <!-- Copy the final assembly to the Plugins directory -->
+    <PropertyGroup>
+        <GameDir>full/path/to/game</GameDir>
+        <PluginsDir>$(GameDir)/BepInEx/plugins</PluginsDir>
+        <DependsDir>$(GameDir)/Obenseuer_Data/Managed</DependsDir>
+        <StagingDir>$(SolutionDir)artifacts/dist</StagingDir>
+        <FinalAssemblyName>$(AssemblyName).dll</FinalAssemblyName>
+        <ZipFileName>$(AssemblyName)-$(Version).zip</ZipFileName>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(BuildStaging)' == 'true'">
+        <StagingFiles Include="$(OutputPath)$(FinalAssemblyName)">
+            <Destination>$(StagingDir)\plugins\%(Filename)%(Extension)</Destination>
+        </StagingFiles>
+        <StagingFiles Include="$(SolutionDir)/README.md">
+            <Destination>$(StagingDir)\%(Filename)%(Extension)</Destination>
+        </StagingFiles>
+        <StagingFiles Include="$(SolutionDir)/LICENSE">
+            <Destination>$(StagingDir)\%(Filename)%(Extension)</Destination>
+        </StagingFiles>
+    </ItemGroup>
+
+    <Target Name="PostBuildCopy_FromConfig" AfterTargets="Build"
+        Condition="'$(DeployToProd)' == 'true'">
+        <Message Text="Deploy -> $(PluginsDir)/$(FinalAssemblyName)" Importance="High" />
         <Copy
             SourceFiles="$(OutputPath)$(FinalAssemblyName)"
             DestinationFolder="$(PluginsDir)"
             Condition="Exists('$(OutputPath)$(FinalAssemblyName)')" />
     </Target>
 
-    <Target Name="LogPropsLoaded">
-        <Message Text="Config file has been loaded." Importance="high" />
+    <Target Name="PostBuildCopy_ToStaging" AfterTargets="Build"
+        Condition="'$(BuildStaging)' == 'true'">
+        <Message Text="Staging files to $(StagingDir)" Importance="High" />
+        <Copy
+            SourceFiles="@(StagingFiles)"
+            DestinationFiles="@(StagingFiles->'%(Destination)')"
+            ContinueOnError="true" />
+    </Target>
+
+    <Target Name="ZipStaging" AfterTargets="PostBuildCopy_ToStaging"
+        Condition="'$(BuildStaging)' == 'true'">
+        <Message Text="Creating zip archive $(StagingDir)/../$(ZipFileName)"
+            Importance="High" />
+        <Exec Command="zip -r $(StagingDir)/../$(ZipFileName) $(StagingDir)/*" />
     </Target>
 </Project>
