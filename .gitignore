@@ -225,3 +225,4 @@ artifacts/*/dist/**/*
 artifacts/**/*.zip
 *.txt
 artifacts/**
+Config.Build.user.props
