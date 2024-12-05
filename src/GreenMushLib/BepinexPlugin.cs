@@ -1,5 +1,7 @@
 using BepInEx;
 using BepInEx.Logging;
+using GreenMushLib.Commands;
+using HarmonyLib;
 
 /*
   Here are some basic resources on code style and naming conventions to help
@@ -11,27 +13,26 @@ using BepInEx.Logging;
 */
 
 [BepInPlugin(LCMPluginInfo.PLUGIN_GUID, LCMPluginInfo.PLUGIN_NAME, LCMPluginInfo.PLUGIN_VERSION)]
-public class Plugin : BaseUnityPlugin
+internal class Plugin : BaseUnityPlugin
 {
-    internal static ManualLogSource Log = null!;
+  internal static ManualLogSource Log = null!;
 
-    private void Awake()
-    {
-        //This is a dummy plugin for now just to be sure BepInEx
-        //Knows we exist so other plugins can find us
+  private void Awake()
+  {
+    /*
+      BepinEx makes you a ManualLogSource for free called "Logger"
+      and I created a static value above to hold on to it so other
+      parts of your plugin's code can find it by using Plugin.Log
 
+      We assign it here
+    */
+    Log = Logger;
 
-        /*
-          BepinEx makes you a ManualLogSource for free called "Logger"
-          and I created a static value above to hold on to it so other
-          parts of your plugin's code can find it by using Plugin.Log
+    // Log our awake here so we can see it in LogOutput.txt file
+    Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
 
-          We assign it here
-        */
-        Log = Logger;
-
-        // Log our awake here so we can see it in LogOutput.txt file
-        Log.LogInfo($"Plugin {LCMPluginInfo.PLUGIN_NAME} version {LCMPluginInfo.PLUGIN_VERSION} is loaded!");
-    }
+    Harmony patcher = new(LCMPluginInfo.PLUGIN_GUID);
+    patcher.PatchAll(typeof(CommandManager));
+  }
 
 }
