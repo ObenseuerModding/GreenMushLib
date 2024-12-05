@@ -4,8 +4,13 @@ A small library of common features for modding Obenseuer
 
 ## Current features
 
-- Prefab Manager
-  - Preloads a list of every Collectable Item in the game for instantiating later in the game
+### Prefab Manager
+
+Preloads a list of every Collectable Item in the game for instantiating later in the game
+
+### Command Manager
+
+Allows the creation and execution of custom commands within the DevConsole
 
 ## Installing
 
