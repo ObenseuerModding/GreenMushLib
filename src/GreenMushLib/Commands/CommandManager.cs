@@ -42,7 +42,7 @@ public static class CommandManager
     internal static bool HandleInput_Prefix(DeveloperConsole __instance, string input)
     {
         LastInConsole = __instance;
-        Plugin.Log.LogInfo($"Running HandleCommand with argument {input}");
+        //Plugin.Log.LogInfo($"Running HandleCommand with argument {input}");
 
         if (LastInConsole == null)
             return true;
@@ -54,7 +54,7 @@ public static class CommandManager
         string[] args = input.SplitOutsideQuotes(' ');
         string cmdName = args[0] ?? string.Empty;
 
-        Plugin.Log.LogMessage($"Command name: {cmdName}");
+        //Plugin.Log.LogMessage($"Command name: {cmdName}");
 
         if (cmdName.ToLowerInvariant() == "ext_help")
         {
