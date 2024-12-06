@@ -10,6 +10,15 @@
     <Version>1.2.0</Version>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="UnityEngine.Modules" Version="2019.4.40">
       <IncludeAssets>all</IncludeAssets>

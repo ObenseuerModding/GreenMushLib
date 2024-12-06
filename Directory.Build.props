@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl></RepositoryUrl>
+    <RepositoryUrl>https://github.com/ObenseuerModding/GreenMushLib</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
