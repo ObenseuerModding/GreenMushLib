@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using System.Text;
@@ -64,8 +65,17 @@ public static class CommandManager
 
         if (CommandRegistry.TryGetValue(cmdName, out var command))
         {
-            command.Execute(args);
+            try
+            {
+                command.Execute(args);
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"\n\nEncountered an exception while running a command:\n  Command: {cmdName}\n  Args: {input}\n  Ex: {ex}");
+            }
+
             return false;
+
         }
 
         return true;
