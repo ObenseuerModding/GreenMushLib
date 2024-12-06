@@ -2,6 +2,11 @@
 
 A small library of common features for modding Obenseuer
 
+- [Current features](#current-features)
+  - [Prefab Manager](#prefab-manager)
+  - [Command Manager](#command-manager)
+- [Installing](#installing)
+
 ## Current features
 
 ### Prefab Manager
