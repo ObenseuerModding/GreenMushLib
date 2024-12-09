@@ -20,8 +20,13 @@ erDiagram
     PhoneNumber {
         string conversation
     }
+    PhoneNumber ||--|| Conversation : references
     CurrentPhone ||--|| ConversationTrigger : contains
     ConversationTrigger {
         DialogueDatabase selectedDatabase
     }
+    DialogueManager {
+        DialogueDatabase masterDatabase
+    }
+    DialogueManager ||--o{ Conversation : contains
 ```
